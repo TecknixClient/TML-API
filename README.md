@@ -16,7 +16,8 @@ This repository is licenced under the GNU General Public License. Any additions 
 ## Setting up
 
 - Open the gradle project in Intellij IDEA or Eclipse.
-- Run "setupDecompWorkspace" then "setupCiWorkspace".![Image](https://imgur.com/pbLxpi5.png)
+- Run "setupDecompWorkspace" then "setupCiWorkspace".
+![Image](https://imgur.com/pbLxpi5.png)
 - Run "genIntellijRuns".
 ![Image](https://imgur.com/gsBTgGv.png)
 - Open the run configuration's settings and change the classpath.
