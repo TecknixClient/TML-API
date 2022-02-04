@@ -1,7 +1,8 @@
 .gradle
 /build/
 /out/
-
+/run/
+/.idea/
 *.jar
 *.class
 

@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.tecknix.modding.implementation.mixin",
+  "refmap": "mixins.moddingapi.refmap.json",
+  "verbose": true,
+  "mixins": [
+    "client.MinecraftMixin"
+  ]
+}
