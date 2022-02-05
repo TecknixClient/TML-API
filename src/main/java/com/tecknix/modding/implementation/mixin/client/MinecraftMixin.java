@@ -20,6 +20,7 @@ package com.tecknix.modding.implementation.mixin.client;
 import com.tecknix.modding.api.event.EventBus;
 import com.tecknix.modding.api.event.type.TMGuiOpenedEvent;
 import com.tecknix.modding.api.event.type.TMMouseEvent;
+import com.tecknix.modding.api.event.type.TMStartupEvent;
 import com.tecknix.modding.api.event.type.TMTickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -31,9 +32,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 
-    @Inject(method = "startGame", at = @At("HEAD"))
+    @Inject(method = "startGame", at = @At("HEAD"), cancellable = true)
     private void injectStartGame(CallbackInfo ci) {
-        //TODO Start Event of some sort.
+        final TMStartupEvent event = new TMStartupEvent();
+
+        if (event.isCanceled()) {
+            ci.cancel();
+        }
+
+        EventBus.post(event);
     }
 
     @Inject(method = "runTick", at = @At("HEAD"), cancellable = true)
@@ -52,11 +59,12 @@ public class MinecraftMixin {
 
     @Inject(method = "displayGuiScreen", at = @At(value = "HEAD"), cancellable = true)
     private void guiDisplayed(GuiScreen s, CallbackInfo callbackInfo) {
-        TMGuiOpenedEvent t = new TMGuiOpenedEvent(s);
+        final TMGuiOpenedEvent event = new TMGuiOpenedEvent(s);
 
-        EventBus.post(t);
+        EventBus.post(event);
 
-        if (t.isCanceled())
+        if (event.isCanceled()) {
             callbackInfo.cancel();
+        }
     }
 }

@@ -15,9 +15,11 @@ public class NetHandlerPlayClientMixin {
     @Inject(method = "handleChat", at = @At("HEAD"), cancellable = true)
     public void handleChat(S02PacketChat packetIn, CallbackInfo ci) {
         final TMChatEvent event = new TMChatEvent(packetIn.getChatComponent());
+
         EventBus.post(event);
 
-        if (event.isCanceled())
+        if (event.isCanceled()) {
             ci.cancel();
+        }
     }
 }
