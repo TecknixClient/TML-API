@@ -18,8 +18,11 @@
 package com.tecknix.modding.implementation.mixin.client;
 
 import com.tecknix.modding.api.event.EventBus;
+import com.tecknix.modding.api.event.type.TMGuiOpenedEvent;
+import com.tecknix.modding.api.event.type.TMMouseEvent;
 import com.tecknix.modding.api.event.type.TMTickEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,9 +39,24 @@ public class MinecraftMixin {
     @Inject(method = "runTick", at = @At("HEAD"), cancellable = true)
     private void injectRunTick(CallbackInfo ci) {
         final TMTickEvent event = new TMTickEvent();
+        EventBus.post(event);
 
         if (event.isCanceled()) ci.cancel();
+    }
 
-        EventBus.post(event);
+    @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lorg/lwjgl/input/Mouse;getEventButton()I"))
+    private void mouseUpdate(CallbackInfo callbackInfo) {
+        EventBus.post(new TMMouseEvent());
+    }
+
+
+    @Inject(method = "displayGuiScreen", at = @At(value = "HEAD"), cancellable = true)
+    private void guiDisplayed(GuiScreen s, CallbackInfo callbackInfo) {
+        TMGuiOpenedEvent t = new TMGuiOpenedEvent(s);
+
+        EventBus.post(t);
+
+        if (t.isCanceled())
+            callbackInfo.cancel();
     }
 }

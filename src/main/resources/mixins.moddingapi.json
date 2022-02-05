@@ -6,6 +6,7 @@
   "refmap": "mixins.moddingapi.refmap.json",
   "verbose": true,
   "mixins": [
-    "client.MinecraftMixin"
+    "client.MinecraftMixin",
+    "client.NetHandlerPlayClientMixin"
   ]
 }
