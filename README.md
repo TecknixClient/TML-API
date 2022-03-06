@@ -1,4 +1,5 @@
 # Tecknix Mod Loader API
+**UPDATE: Coming super soon! Thank you all for waiting on us!**
 **THIS API IS NOT COMPLETE AND WILL NOT YET ALLOW YOU TO MOD THE CLIENT**
 
 [![Discord](https://img.shields.io/badge/chat%20on-discord-7289DA)](https://discord.gg/qn7BsjHHbN)
