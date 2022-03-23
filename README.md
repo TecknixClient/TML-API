@@ -60,7 +60,7 @@ Methods should have a header including the purpose of the method, the author of 
 	  final ArrayList<EventContent> contents = EVENT_REGISTRY.get(event.getClass());  
 	  if (contents != null) {  
 		  for (final EventContent content : contents) {  
-				  event.invoke(content);  
+		  	event.invoke(content);  
 		  } 
 	  } 
  }
