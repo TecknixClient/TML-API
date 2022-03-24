@@ -1,15 +1,16 @@
 package com.tecknix.modding.implementation.tweaker;
 
 import com.google.common.collect.Lists;
-import com.tecknix.modding.implementation.MixinLoader;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.MixinEnvironment;
+import org.spongepowered.asm.mixin.Mixins;
 
 import java.io.File;
 import java.util.List;
 
-public class ModdingTweaker implements ITweaker {
+public class DevTweaker implements ITweaker {
 
     private final List<String> launchArguments = Lists.newArrayList();
 
@@ -34,8 +35,17 @@ public class ModdingTweaker implements ITweaker {
 
     @Override
     public final void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        MixinLoader.load("moddingapi");
-        MixinLoader.load("test");
+        MixinBootstrap.init();
+
+        MixinEnvironment environment = MixinEnvironment.getDefaultEnvironment();
+
+        Mixins.addConfiguration("mixins." + "moddingapi" + ".json");
+
+        if (environment.getObfuscationContext() == null) {
+            environment.setObfuscationContext("notch");
+        }
+
+        environment.setSide(MixinEnvironment.Side.CLIENT);
     }
 
     @Override
