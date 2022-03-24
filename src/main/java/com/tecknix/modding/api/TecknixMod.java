@@ -21,15 +21,14 @@ import com.tecknix.modding.api.menu.IMenuEntry;
 import com.tecknix.modding.api.transform.IModTransformer;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Getter
 public abstract class TecknixMod {
 
-    private final List<IMenuEntry> menuEntries = new CopyOnWriteArrayList<>();
-    private final List<IModTransformer> modTransformers = new CopyOnWriteArrayList<>();
+    private final List<IMenuEntry> menuEntries = new ArrayList<>();
 
     /**
      * Called on initialization by the mod loader.
@@ -46,20 +45,24 @@ public abstract class TecknixMod {
     public abstract void onTerminate();
 
     /**
+     * Fetches a list of transformers to run before client initialization.
+     *
+     * @author Tecknix Software.
+     */
+    public List<IModTransformer> getTransformers() {
+        return null; //If this returns null, transformers will be ignored all together!
+    }
+
+    public String[] getMixinConfigNames() {
+        return null; //If this returns null, Mixins will be ignored all together!
+    }
+
+    /**
      * Used to register entries into the mod menu.
      *
      * @author Tecknix Software
      */
     protected void registerMenuEntries(IMenuEntry... entries) {
         this.menuEntries.addAll(Arrays.asList(entries));
-    }
-
-    /**
-     * Used to register transformers.
-     *
-     * @author Tecknix Software
-     */
-    protected void registerModTransformers(IModTransformer... entries) {
-        this.modTransformers.addAll(Arrays.asList(entries));
     }
 }
