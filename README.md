@@ -1,4 +1,5 @@
 # Tecknix Mod Loader API
+**UPDATE: Coming super soon! Thank you all for waiting on us!**
 **THIS API IS NOT COMPLETE AND WILL NOT YET ALLOW YOU TO MOD THE CLIENT**
 
 [![Discord](https://img.shields.io/badge/chat%20on-discord-7289DA)](https://discord.gg/qn7BsjHHbN)
@@ -59,7 +60,7 @@ Methods should have a header including the purpose of the method, the author of 
 	  final ArrayList<EventContent> contents = EVENT_REGISTRY.get(event.getClass());  
 	  if (contents != null) {  
 		  for (final EventContent content : contents) {  
-				  event.invoke(content);  
+		  	event.invoke(content);  
 		  } 
 	  } 
  }
