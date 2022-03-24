@@ -18,10 +18,7 @@
 package com.tecknix.modding.implementation.mixin.client;
 
 import com.tecknix.modding.api.event.EventBus;
-import com.tecknix.modding.api.event.type.TMGuiOpenedEvent;
-import com.tecknix.modding.api.event.type.TMMouseEvent;
-import com.tecknix.modding.api.event.type.TMStartupEvent;
-import com.tecknix.modding.api.event.type.TMTickEvent;
+import com.tecknix.modding.api.event.type.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,12 +40,25 @@ public class MinecraftMixin {
         EventBus.post(event);
     }
 
+    @Inject(method = "shutdown", at = @At("HEAD"), cancellable = true)
+    private void injectShutDown(CallbackInfo ci) {
+        final TMShutdownEvent event = new TMShutdownEvent();
+
+        if (event.isCanceled()) {
+            ci.cancel();
+        }
+
+        EventBus.post(event);
+    }
+
     @Inject(method = "runTick", at = @At("HEAD"), cancellable = true)
     private void injectRunTick(CallbackInfo ci) {
         final TMTickEvent event = new TMTickEvent();
         EventBus.post(event);
 
-        if (event.isCanceled()) ci.cancel();
+        if (event.isCanceled()) {
+            ci.cancel();
+        }
     }
 
     @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lorg/lwjgl/input/Mouse;getEventButton()I"))
@@ -61,10 +71,10 @@ public class MinecraftMixin {
     private void guiDisplayed(GuiScreen s, CallbackInfo callbackInfo) {
         final TMGuiOpenedEvent event = new TMGuiOpenedEvent(s);
 
-        EventBus.post(event);
-
         if (event.isCanceled()) {
             callbackInfo.cancel();
         }
+
+        EventBus.post(event);
     }
 }

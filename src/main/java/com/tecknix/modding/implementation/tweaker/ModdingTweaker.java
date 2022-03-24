@@ -34,7 +34,8 @@ public class ModdingTweaker implements ITweaker {
 
     @Override
     public final void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        MixinLoader.init();
+        MixinLoader.load("moddingapi");
+        MixinLoader.load("test");
     }
 
     @Override

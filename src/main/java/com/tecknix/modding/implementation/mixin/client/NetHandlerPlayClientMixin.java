@@ -16,10 +16,10 @@ public class NetHandlerPlayClientMixin {
     public void handleChat(S02PacketChat packetIn, CallbackInfo ci) {
         final TMChatEvent event = new TMChatEvent(packetIn.getChatComponent());
 
-        EventBus.post(event);
-
         if (event.isCanceled()) {
             ci.cancel();
         }
+
+        EventBus.post(event);
     }
 }

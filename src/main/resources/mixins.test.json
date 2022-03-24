@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.tecknix.modding.implementation.test",
+  "refmap": "mixins.testrrefmap.json",
+  "verbose": true,
+  "mixins": [
+    "MinecraftMEFKLGHSDFHJLFSD"
+  ]
+}
