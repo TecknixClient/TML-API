@@ -45,19 +45,6 @@ public abstract class TecknixMod {
     public abstract void onTerminate();
 
     /**
-     * Fetches a list of transformers to run before client initialization.
-     *
-     * @author Tecknix Software.
-     */
-    public List<IModTransformer> getTransformers() {
-        return null; //If this returns null, transformers will be ignored all together!
-    }
-
-    public String[] getMixinConfigNames() {
-        return null; //If this returns null, Mixins will be ignored all together!
-    }
-
-    /**
      * Used to register entries into the mod menu.
      *
      * @author Tecknix Software
