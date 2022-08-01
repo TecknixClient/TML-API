@@ -3,6 +3,7 @@ package com.tecknix.modding.api.event.type;
 import com.tecknix.modding.api.event.TMEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.lwjgl.input.Keyboard;
 
 /**
  * TMKeyEvent

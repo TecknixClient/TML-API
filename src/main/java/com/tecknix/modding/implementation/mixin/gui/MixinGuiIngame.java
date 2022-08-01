@@ -1,7 +1,8 @@
-package com.tecknix.modding.implementation.mixin.client;
+package com.tecknix.modding.implementation.mixin.gui;
 
 import com.tecknix.modding.api.event.EventBus;
 import com.tecknix.modding.api.event.type.TMRenderIngameGuiEvent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
