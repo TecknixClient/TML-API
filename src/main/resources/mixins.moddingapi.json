@@ -8,6 +8,7 @@
   "mixins": [
     "client.MinecraftMixin",
     "gui.MixinGuiIngame",
-    "client.NetHandlerPlayClientMixin"
+    "client.NetHandlerPlayClientMixin",
+    "client.EntityRendererMixin"
   ]
 }
